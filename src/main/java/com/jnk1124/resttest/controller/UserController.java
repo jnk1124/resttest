@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity insertUser(@RequestBody User user){
+    public ResponseEntity insertUser(@Valid @RequestBody User user){
         long id = userService.insertUser(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -61,7 +62,7 @@ public class UserController {
     }
 
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@Valid @RequestBody User user){
         long userId = user.getId();
 
         logger.debug("userId : " + userId);
