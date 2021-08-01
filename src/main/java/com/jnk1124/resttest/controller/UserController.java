@@ -3,29 +3,30 @@ package com.jnk1124.resttest.controller;
 import com.jnk1124.resttest.exception.UserNotFoundException;
 import com.jnk1124.resttest.repository.User;
 import com.jnk1124.resttest.service.UserService;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 
-@Controller
-@RequiredArgsConstructor
+@RestController
 public class UserController {
 
-    private final UserService userService;
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/users")
-    @ResponseBody
     public List<User> getUserList(){
         return userService.getUserList();
     }
 
     @GetMapping("/users/{userId}")
-    @ResponseBody
     public User getUsers( @PathVariable long userId){
 
         User selectUser = userService.getUser(userId);
@@ -38,7 +39,6 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    @ResponseBody
     public ResponseEntity insertUser(@RequestBody User user){
         long id = userService.insertUser(user);
 
@@ -51,7 +51,6 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    @ResponseBody
     public void deleteUser(@PathVariable long id){
 
         User user = userService.deleteById(id);
@@ -59,7 +58,25 @@ public class UserController {
         if(user == null){
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
+    }
 
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user){
+        long userId = user.getId();
+
+        logger.debug("userId : " + userId);
+
+        if(userId != 0){
+            User selectUser = userService.getUser(userId);
+
+            if(selectUser == null){
+                throw new UserNotFoundException(String.format("ID[%s] not found", userId));
+            }
+            // update user
+            return userService.updateUser(user);
+        }else{
+            throw new UserNotFoundException(String.format("ID[%s] not found", userId));
+        }
     }
 
 }

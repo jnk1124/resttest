@@ -1,8 +1,11 @@
 package com.jnk1124.resttest.service;
 
+import com.jnk1124.resttest.controller.UserController;
 import com.jnk1124.resttest.repository.User;
 import com.jnk1124.resttest.repository.UserData;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,6 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserData userData;
 
@@ -48,5 +52,17 @@ public class UserService {
         }
 
         return null;
+    }
+
+    public User updateUser(User updateUser){
+        long id = updateUser.getId();
+
+        logger.debug("update Id : " + id);
+
+        User user = getUser(id);
+        user.setName(updateUser.getName());
+        user.setDateTime(LocalDateTime.now());
+
+        return user;
     }
 }

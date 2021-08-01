@@ -4,4 +4,5 @@ server:
 logging:
   level:
     org.springframework: debug
+    com.jnk1124: debug
 
