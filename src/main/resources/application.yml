@@ -6,3 +6,7 @@ logging:
     org.springframework: debug
     com.jnk1124: debug
 
+spring:
+  message:
+    basename: messages
+
