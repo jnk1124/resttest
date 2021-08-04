@@ -10,3 +10,8 @@ spring:
   message:
     basename: messages
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
