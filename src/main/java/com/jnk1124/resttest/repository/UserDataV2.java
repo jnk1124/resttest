@@ -3,7 +3,6 @@ package com.jnk1124.resttest.repository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,13 +10,13 @@ import java.util.List;
 
 @Component
 @Getter @Setter
-public class UserData {
+public class UserDataV2 {
 
     private List<User> users;
 
     private long maxId;
 
-    public UserData(){
+    public UserDataV2(){
         users = new ArrayList<>();
         users.add(new User("Kim", 1, LocalDateTime.now(), "asdf1234","12345-1592929"));
         users.add(new User("Lee", 2, LocalDateTime.now(), "qwerty5432","113953-1938384s"));
