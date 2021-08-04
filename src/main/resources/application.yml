@@ -9,6 +9,10 @@ logging:
 spring:
   message:
     basename: messages
+  security:
+    user:
+      name: test
+      password: passwOrd
 
 management:
   endpoints:

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")
 //@JsonIgnoreProperties(value={"password", "ssn" })
-@JsonFilter(value = "UserInfo")
+//@JsonFilter(value = "UserInfo")
 public class User {
 
     @Size(min=2, message = "이름은 2자 이상 입력해야합니다.")
