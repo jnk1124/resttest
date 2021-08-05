@@ -1,18 +1,37 @@
 server:
   port: 8088
 
+spring:
+  message:
+    basename: messages
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    defer-datasource-initialization: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+
+  h2:
+    console:
+      enable: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+
 logging:
   level:
     org.springframework: debug
     com.jnk1124: debug
 
-spring:
-  message:
-    basename: messages
-  security:
-    user:
-      name: test
-      password: passwOrd
+
+#  security:
+#    user:
+#      name: test
+#      password: passwOrd
 
 management:
   endpoints:
