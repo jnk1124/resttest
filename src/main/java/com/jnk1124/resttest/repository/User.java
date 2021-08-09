@@ -14,8 +14,10 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -26,8 +28,16 @@ import java.time.LocalDateTime;
 //@JsonFilter(value = "UserInfo")
 public class User {
 
+    public User(Long id, LocalDateTime dateTime, String name, String password, String ssn) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.name = name;
+        this.password = password;
+        this.ssn = ssn;
+    }
+
     @Id @GeneratedValue
-    private long id;
+    private Long id;
     @ApiModelProperty(notes = "등록일시를 입력해주세요.")
     private LocalDateTime dateTime;
     @Size(min=2, message = "이름은 2자 이상 입력해야합니다.")
@@ -38,4 +48,7 @@ public class User {
     //@JsonIgnore
     @ApiModelProperty(notes = "주민번호를 입력하세요.")
     private String ssn;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> postList;
 }

@@ -19,9 +19,9 @@ public class UserData {
 
     public UserData(){
         users = new ArrayList<>();
-        users.add(new User( 1, LocalDateTime.now(), "Kim", "asdf1234","12345-1592929"));
-        users.add(new User(2, LocalDateTime.now(), "Lee", "qwerty5432","113953-1938384s"));
-        users.add(new User( 3, LocalDateTime.now(), "Park", "bejimil1", "440029-128339"));
+        users.add(new User( 1l, LocalDateTime.now(), "Kim", "asdf1234","12345-1592929"));
+        users.add(new User(2l, LocalDateTime.now(), "Lee", "qwerty5432","113953-1938384s"));
+        users.add(new User( 3l, LocalDateTime.now(), "Park", "bejimil1", "440029-128339"));
 
         maxId = users.size();
     }
